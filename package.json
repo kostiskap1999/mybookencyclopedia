@@ -2,13 +2,13 @@
   "name": "mybookencyclopedia",
   "version": "0.1.0",
   "private": true,
-  "main": "electron.js",
+  "main": "scripts/electron.js",
   "scripts": {
     "dev": "next dev --webpack",
     "build": "next build",
     "start-old": "next start",
-    "start": "node start.js",
-    "electron": "electron .",
+    "start": "node scripts/start.js",
+    "electron": "electron scripts/electron.js",
     "lint": "eslint .",
     "test": "jest"
   },
