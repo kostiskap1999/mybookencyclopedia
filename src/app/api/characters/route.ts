@@ -12,6 +12,7 @@ export async function POST(req: NextRequest) {
   const character = await prisma.character.create({
     data: {
       name: data.name,
+      age: data.age ?? null,
       bio: data.bio ?? '',
       bookId: data.bookId,
     },

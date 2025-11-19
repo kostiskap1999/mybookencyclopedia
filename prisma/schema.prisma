@@ -14,25 +14,29 @@ datasource db {
 model Book {
   id         Int         @id @default(autoincrement())
   title      String
-  authorName String?
-  summary    String?
-  createdAt  DateTime    @default(now())
+  author     String?
   characters Character[]
   notes      Note[]
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
 }
 
 model Character {
-  id      Int    @id @default(autoincrement())
-  bookId  Int
-  name    String
-  bio     String?
-  book    Book   @relation(fields: [bookId], references: [id])
+  id        Int      @id @default(autoincrement())
+  name      String
+  age       Int?
+  bio       String?
+  bookId    Int?
+  book      Book?    @relation(fields: [bookId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Note {
-  id      Int    @id @default(autoincrement())
-  bookId  Int
-  title   String
-  content String
-  book    Book   @relation(fields: [bookId], references: [id])
+  id         Int      @id @default(autoincrement())
+  content    String
+  book       Book?     @relation(fields: [bookId], references: [id])
+  bookId     Int?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 }
