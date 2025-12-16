@@ -13,12 +13,12 @@ export async function fetchBooks(): Promise<Book[] | null> {
   }
 }
 
-export async function addBook(title: string, author?: string | null): Promise<Book | null> {
+export async function addBook(book: Book): Promise<Book | null> {
   try {
     const res = await fetch('/api/books', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ title, author }),
+      body: JSON.stringify(book),
     })
     if (!res.ok)
       throw new Error(JSON.stringify(res.status))

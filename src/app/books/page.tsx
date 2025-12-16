@@ -22,9 +22,10 @@ export default function BooksPage() {
     if (!newBook.title.trim())
       return
 
-    const book = await addBook(newBook.title, newBook.author) 
+    const book = await addBook(newBook) 
     if (book) {
       setBooks(prev => [book, ...prev])
+      setNewBook(defaultBook)
     }
   }
 
