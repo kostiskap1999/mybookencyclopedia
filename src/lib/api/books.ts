@@ -1,5 +1,5 @@
 import { Book } from "@/interfaces/book"
-import { handleError } from "../error/handleError"
+import { handleError } from "@/lib/error/handleError"
 
 export async function fetchBooks(): Promise<Book[] | null> {
   try {
