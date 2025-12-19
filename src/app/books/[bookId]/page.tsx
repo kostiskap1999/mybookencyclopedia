@@ -122,30 +122,6 @@ export default function BookDetailPage() {
                       <span className="ml-2 text-gray-900">{book.author}</span>
                     </div>
                   )}
-                  <div>
-                    <span className="font-medium text-gray-700">ID:</span>
-                    <span className="ml-2 text-gray-900">{book.id}</span>
-                  </div>
-                </div>
-              </div>
-
-              <div>
-                <h2 className="text-xl font-semibold text-gray-900 mb-4">
-                  Quick Actions
-                </h2>
-                <div className="space-y-3">
-                  <Link
-                    href={`/books/${bookId}/characters`}
-                    className="block w-full px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 text-center transition-colors"
-                  >
-                    View Characters
-                  </Link>
-                  <Link
-                    href={`/books/${bookId}/notes`}
-                    className="block w-full px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 text-center transition-colors"
-                  >
-                    View Notes
-                  </Link>
                 </div>
               </div>
             </div>
