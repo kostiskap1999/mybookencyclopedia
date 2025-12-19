@@ -8,7 +8,7 @@ export default function Home() {
           Welcome to MyBookEncyclopedia
         </h1>
         <p className="text-lg text-gray-600 mb-8">
-          Your personal collection of books and characters
+          Your personal collection of books
         </p>
         <div className="space-y-4">
           <Link href="/books">

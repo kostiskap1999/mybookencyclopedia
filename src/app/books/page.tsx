@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 import { fetchBooks, addBook } from '@/lib/api/books'
 import { Book, defaultBook } from '@/interfaces/book'
 
@@ -34,7 +35,9 @@ export default function BooksPage() {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="flex items-center justify-between mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">Books</h1>
+        <h1 className="text-3xl font-bold text-gray-900">
+          Books
+        </h1>
         <button
           onClick={() => router.push('/')}
           className="px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-colors"
@@ -70,10 +73,16 @@ export default function BooksPage() {
 
       <div className="space-y-4">
         {books.map(book => (
-          <div key={book.id} className="bg-white shadow-sm rounded-lg p-4 border border-gray-200">
-            <h2 className="text-xl font-semibold text-gray-900">{book.title}</h2>
-            {book.author && <p className="text-gray-600 mt-1">by {book.author}</p>}
-          </div>
+          <Link key={book.id} href={`/books/${book.id}`}>
+            <div className="bg-white shadow-sm rounded-lg p-4 border border-gray-200 hover:shadow-md hover:border-gray-300 transition-shadow cursor-pointer">
+              <h2 className="text-xl font-semibold text-gray-900">
+                {book.title}
+              </h2>
+              {book.author && <p className="text-gray-600 mt-1">
+                by {book.author}
+              </p>}
+            </div>
+          </Link>
         ))}
       </div>
     </div>
