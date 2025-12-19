@@ -1,8 +1,13 @@
 import { prisma } from '@/lib/prisma'
 import { NextRequest } from 'next/server'
 
-export async function GET() {
-  const notes = await prisma.note.findMany()
+export async function GET(req: NextRequest) {
+  const { searchParams } = new URL(req.url)
+  const bookId = searchParams.get('bookId')
+
+  const notes = await prisma.note.findMany({
+    where: bookId ? { bookId: parseInt(bookId) } : undefined,
+  })
   return Response.json(notes)
 }
 
@@ -11,7 +16,6 @@ export async function POST(req: NextRequest) {
 
   const note = await prisma.note.create({
     data: {
-      title: data.title,
       content: data.content ?? '',
       bookId: data.bookId,
     },

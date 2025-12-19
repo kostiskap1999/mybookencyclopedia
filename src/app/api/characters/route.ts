@@ -1,8 +1,13 @@
 import { prisma } from '@/lib/prisma'
 import { NextRequest } from 'next/server'
 
-export async function GET() {
-  const characters = await prisma.character.findMany()
+export async function GET(req: NextRequest) {
+  const { searchParams } = new URL(req.url)
+  const bookId = searchParams.get('bookId')
+
+  const characters = await prisma.character.findMany({
+    where: bookId ? { bookId: parseInt(bookId) } : undefined,
+  })
   return Response.json(characters)
 }
 
