@@ -2,13 +2,14 @@ generator client {
   provider = "prisma-client-js"
 }
 
+/* copilot:disable */
 datasource db {
   provider = "sqlite"
 }
+/* copilot:enable */
 
 
 ///////////////////////////////////////////////////////////////////////
-
 
 model Book {
   id         Int         @id @default(autoincrement())
@@ -16,26 +17,76 @@ model Book {
   author     String?
   characters Character[]
   notes      Note[]
-  createdAt  DateTime    @default(now())
-  updatedAt  DateTime    @updatedAt
-}
+  timelines  Timeline[]
+  items      Item[]
 
-model Character {
-  id        Int      @id @default(autoincrement())
-  name      String
-  age       Int?
-  bio       String?
-  bookId    Int?
-  book      Book?    @relation(fields: [bookId], references: [id])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
+
+model Character {
+  id           Int         @id @default(autoincrement())
+  name         String
+  age          Int?
+  gender       String
+  bio          String?
+  appearance   Appearance[]
+  
+  book         Book?       @relation(fields: [bookId], references: [id])
+  bookId       Int?
+  
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+}
+
+
 model Note {
-  id         Int      @id @default(autoincrement())
-  content    String
-  book       Book?     @relation(fields: [bookId], references: [id])
-  bookId     Int?
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  id        Int      @id @default(autoincrement())
+  content   String
+  
+  book      Book?    @relation(fields: [bookId], references: [id])
+  bookId    Int?
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+
+model Timeline {
+  id        Int      @id @default(autoincrement())
+  startYear DateTime
+  endYear   DateTime
+  
+  book      Book?    @relation(fields: [bookId], references: [id])
+  bookId    Int?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+
+model Item {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String?
+
+  book        Book?    @relation(fields: [bookId], references: [id])
+  bookId      Int?
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+
+model Appearance {
+  id         Int         @id @default(autoincrement())
+  attribute  String
+  value      String?
+
+  character  Character?  @relation(fields: [characterId], references: [id])
+  characterId Int?
+
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
 }

@@ -3,6 +3,7 @@ export interface Character {
   name: string
   age?: number | null
   bio?: string | null
+  gender?: string | null
   bookId: number
 }
 
